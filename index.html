@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator Modern</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark">
+  <div class="calculator-app">
+    <!-- Header Bar -->
+    <header class="app-header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="2" width="16" height="20" rx="3" />
+          <line x1="8" y1="6" x2="16" y2="6" />
+          <line x1="8" y1="10" x2="10" y2="10" />
+          <line x1="14" y1="10" x2="16" y2="10" />
+          <line x1="8" y1="14" x2="10" y2="14" />
+          <line x1="14" y1="14" x2="16" y2="14" />
+          <line x1="8" y1="18" x2="16" y2="18" />
+        </svg>
+        <span>Kalkulator</span>
+      </div>
+      <div class="header-actions">
+        <!-- Scientific Toggle -->
+        <button id="btn-toggle-scientific" class="icon-btn" title="Mode Ilmiah" aria-label="Mode Ilmiah">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19h16M4 5h16M8 5v14M16 5v14" />
+          </svg>
+        </button>
+        <!-- Theme Toggle -->
+        <button id="btn-toggle-theme" class="icon-btn" title="Ganti Tema" aria-label="Ganti Tema">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <!-- History Toggle -->
+        <button id="btn-toggle-history" class="icon-btn" title="Riwayat" aria-label="Riwayat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <span id="history-badge" class="badge hidden">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Display Screen -->
+    <section class="display-container" id="display-container">
+      <div id="copy-toast" class="copy-toast hidden">Tersalin ke papan klip</div>
+      <div id="error-banner" class="error-banner hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        <span id="error-text">Tidak dapat membagi dengan nol</span>
+      </div>
+      <div class="expression-wrapper">
+        <span id="expression-display" class="expression-text">0</span>
+      </div>
+      <div class="result-wrapper">
+        <span id="preview-display" class="preview-text"></span>
+      </div>
+    </section>
+
+    <!-- Scientific Panel -->
+    <div id="scientific-panel" class="scientific-panel hidden">
+      <button class="key btn-sci" data-action="toggle-angle" id="btn-angle">DEG</button>
+      <button class="key btn-sci" data-action="function" data-val="sin">sin</button>
+      <button class="key btn-sci" data-action="function" data-val="cos">cos</button>
+      <button class="key btn-sci" data-action="function" data-val="tan">tan</button>
+      <button class="key btn-sci" data-action="function" data-val="ln">ln</button>
+      <button class="key btn-sci" data-action="function" data-val="log">log</button>
+      <button class="key btn-sci" data-action="function" data-val="√">√</button>
+      <button class="key btn-sci" data-action="operator" data-val="^">^</button>
+      <button class="key btn-sci" data-action="constant" data-val="π">π</button>
+      <button class="key btn-sci" data-action="constant" data-val="e">e</button>
+      <button class="key btn-sci" data-action="paren" data-val="(">(</button>
+      <button class="key btn-sci" data-action="paren" data-val=")">)</button>
+    </div>
+
+    <!-- Main Keypad -->
+    <div class="keypad">
+      <!-- Row 1 -->
+      <button class="key btn-fn" data-action="clear">C</button>
+      <button class="key btn-fn" data-action="backspace">⌫</button>
+      <button class="key btn-fn" data-action="percent">%</button>
+      <button class="key btn-op" data-action="operator" data-val="÷">÷</button>
+
+      <!-- Row 2 -->
+      <button class="key btn-num" data-action="digit" data-val="7">7</button>
+      <button class="key btn-num" data-action="digit" data-val="8">8</button>
+      <button class="key btn-num" data-action="digit" data-val="9">9</button>
+      <button class="key btn-op" data-action="operator" data-val="×">×</button>
+
+      <!-- Row 3 -->
+      <button class="key btn-num" data-action="digit" data-val="4">4</button>
+      <button class="key btn-num" data-action="digit" data-val="5">5</button>
+      <button class="key btn-num" data-action="digit" data-val="6">6</button>
+      <button class="key btn-op" data-action="operator" data-val="−">−</button>
+
+      <!-- Row 4 -->
+      <button class="key btn-num" data-action="digit" data-val="1">1</button>
+      <button class="key btn-num" data-action="digit" data-val="2">2</button>
+      <button class="key btn-num" data-action="digit" data-val="3">3</button>
+      <button class="key btn-op" data-action="operator" data-val="+">+</button>
+
+      <!-- Row 5 -->
+      <button class="key btn-fn" data-action="plus-minus">±</button>
+      <button class="key btn-num" data-action="digit" data-val="0">0</button>
+      <button class="key btn-num" data-action="decimal">.</button>
+      <button class="key btn-eq" data-action="equals">=</button>
+    </div>
+
+    <!-- History Drawer -->
+    <aside id="history-drawer" class="history-drawer hidden">
+      <div class="history-header">
+        <h3>Riwayat Perhitungan</h3>
+        <div class="history-header-actions">
+          <button id="btn-clear-history" class="icon-btn danger" title="Hapus Riwayat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6" />
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
+          </button>
+          <button id="btn-close-history" class="icon-btn" title="Tutup">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="history-list" class="history-list">
+        <div class="empty-history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <p>Belum ada riwayat perhitungan</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

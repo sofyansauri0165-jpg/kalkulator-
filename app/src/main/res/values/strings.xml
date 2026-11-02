@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Kalkulator</string>
+    <string name="history_title">Riwayat Perhitungan</string>
+    <string name="history_empty">Belum ada riwayat perhitungan</string>
+    <string name="clear_history">Hapus Riwayat</string>
+    <string name="copied_to_clipboard">Disalin ke papan klip</string>
+    <string name="error_divide_zero">Tidak dapat membagi dengan nol</string>
+    <string name="error_invalid_format">Format perhitungan tidak valid</string>
+    <string name="theme_light">Terang</string>
+    <string name="theme_dark">Gelap</string>
+    <string name="theme_system">Sistem</string>
+    <string name="haptics">Getaran Sentuh</string>
+</resources>

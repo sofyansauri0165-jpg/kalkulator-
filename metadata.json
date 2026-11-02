@@ -1,0 +1,6 @@
+{
+  "name": "Kalkulator",
+  "description": "Aplikasi kalkulator modern dan responsif dengan riwayat perhitungan, tema gelap/terang, dan validasi ekspresi akurat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
